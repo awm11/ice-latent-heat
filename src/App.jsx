@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import BuyMeCoffeeButton from './BuyMeCoffee.jsx';
 import './styles.css';
 
 // ===== Simulation (plain JS) =====
@@ -964,8 +965,11 @@ function App() {
 
   return h('div', { className: 'app' },
     h('header', { className: 'top' },
-      h('h1', null, 'Why does salt make ice colder?'),
-      h('p', { className: 'lede' }, 'Add salt to ice in an insulated beaker, stir it in, and follow where the energy goes.')),
+      h('a', { className: 'favicon-link', href: 'https://awm11.github.io/', target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Visit awm11.github.io' },
+        h('img', { src: '/favicon.svg', alt: '', className: 'favicon-img' })),
+      h('div', { className: 'title-block' },
+        h('h1', null, 'Why does salt make ice colder?'),
+        h('p', { className: 'lede' }, 'Add salt to ice in an insulated beaker, stir it in, and follow where the energy goes.'))),
     h('main', { className: 'grid' },
       h('section', { className: 'lab' },
         h('div', { className: 'stage' },
@@ -1007,7 +1011,8 @@ function App() {
         !tempOpen && tempPanel,
         h(Panel, { title: 'What\u2019s in the beaker', startOpen: true },
           h('p', { className: 'note' }, 'By mass'),
-          h(Pie, { water: s.m })))),
+          h(Pie, { water: s.m })),
+        h('div', { className: 'coffee-row' }, h(BuyMeCoffeeButton)))),
     h('footer', { className: 'foot' },
       h('p', null, 'Model assumptions: the beaker is perfectly insulated and the whole beaker melts evenly rather than shard by shard. Each scoop of salt lowers the freezing point by the same amount; six scoops reach \u221221.1 \u00B0C, the lowest freezing point salt water can have (about 23% salt). The ice starts at \u22122 \u00B0C. The ice cream mix has about a fifth of the mass of the ice, starts at 5 \u00B0C and freezes at about \u22123 \u00B0C.')));
 }
