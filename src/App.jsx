@@ -329,10 +329,14 @@ class Sim {
     if (!this.insulated) {
       const q = LEAK * (ROOM_T - this.T()) * dt * speed * SLOW;
       this.Uw += q;
-      // once the ice is at its freezing point, incoming heat melts it instead of warming it further
+      // once the ice is at its freezing point, incoming heat melts it instead of warming it further.
+      // Cap this frame's conversion to what the leaked heat itself could account for, so that a
+      // freezing point which suddenly drops (salt going in while uninsulated) doesn't dump a whole
+      // backlog of "excess" into the ice in one frame — any remaining gap is melted gradually by
+      // the ordinary above-freezing-point pacing below instead.
       const keCap = 75 + KW * this.fp;
       if (q > 0 && this.m < 0.97 && this.keW() > keCap) {
-        this.m += Math.min(0.97 - this.m, (this.keW() - keCap) / LW);
+        this.m += Math.min(0.97 - this.m, q / LW, (this.keW() - keCap) / LW);
       }
     }
     // ice melts whenever it is warmer than its freezing point: kinetic -> potential
@@ -966,7 +970,7 @@ function App() {
   return h('div', { className: 'app' },
     h('header', { className: 'top' },
       h('a', { className: 'favicon-link', href: 'https://awm11.github.io/', target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Visit awm11.github.io' },
-        h('img', { src: '/favicon.svg', alt: '', className: 'favicon-img' })),
+        h('img', { src: `${import.meta.env.BASE_URL}favicon.svg`, alt: '', className: 'favicon-img' })),
       h('div', { className: 'title-block' },
         h('h1', null, 'Why does salt make ice colder?'),
         h('p', { className: 'lede' }, 'Add salt to ice in an insulated beaker, stir it in, and follow where the energy goes.'))),
@@ -998,7 +1002,9 @@ function App() {
         h('div', { className: 'story' },
           h('ol', { className: 'steps' }, STEPS.map((t, i) =>
             h('li', { key: i, className: i < stage ? 'done' : i === stage ? 'now' : '' }, h('span', { className: 'num' }, i < stage ? '\u2713' : i + 1), t))),
-          h('div', { className: 'explain', 'aria-live': 'polite' }, explain(stage, s).concat(creamNotes(s)).map((p, i) => h('p', { key: stage + '-' + i }, p))))),
+          h('div', { className: 'explain', 'aria-live': 'polite' }, explain(stage, s).concat(creamNotes(s)).map((p, i) => h('p', { key: stage + '-' + i }, p)))),
+        h('footer', { className: 'foot' },
+          h('p', null, 'Model assumptions: the beaker is perfectly insulated and the whole beaker melts evenly rather than shard by shard. Each scoop of salt lowers the freezing point by the same amount; six scoops reach \u221221.1 \u00B0C, the lowest freezing point salt water can have (about 23% salt). The ice starts at \u22122 \u00B0C. The ice cream mix has about a fifth of the mass of the ice, starts at 5 \u00B0C and freezes at about \u22123 \u00B0C.'))),
       h('aside', { className: 'panel' },
         h(Panel, { title: 'Energy of the particles', startOpen: true },
           h('p', { className: 'eq' }, 'Internal energy = ', h('span', { className: 'k' }, 'kinetic'), ' + ', h('span', { className: 'p' }, 'potential')),
@@ -1012,9 +1018,12 @@ function App() {
         h(Panel, { title: 'What\u2019s in the beaker', startOpen: true },
           h('p', { className: 'note' }, 'By mass'),
           h(Pie, { water: s.m })),
-        h('div', { className: 'coffee-row' }, h(BuyMeCoffeeButton)))),
-    h('footer', { className: 'foot' },
-      h('p', null, 'Model assumptions: the beaker is perfectly insulated and the whole beaker melts evenly rather than shard by shard. Each scoop of salt lowers the freezing point by the same amount; six scoops reach \u221221.1 \u00B0C, the lowest freezing point salt water can have (about 23% salt). The ice starts at \u22122 \u00B0C. The ice cream mix has about a fifth of the mass of the ice, starts at 5 \u00B0C and freezes at about \u22123 \u00B0C.')));
+        h('div', { className: 'bottom-block' },
+          h('a', { className: 'more-sims', href: 'https://awm11.github.io/', target: '_blank', rel: 'noopener noreferrer' },
+            h('img', { src: `${import.meta.env.BASE_URL}favicon.svg`, alt: '', className: 'more-sims-icon' }),
+            h('span', null, 'See other simulations')),
+          h('p', { className: 'more-sims-note' }, 'Click the icon above to explore other interactive physics simulations like this one, or below to support the project.'),
+          h('div', { className: 'coffee-row' }, h(BuyMeCoffeeButton))))));
 }
 
 export default App;

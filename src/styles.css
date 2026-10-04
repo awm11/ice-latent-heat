@@ -32,7 +32,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperl
 .favicon-link:hover,.favicon-link:focus-visible{transform:scale(1.15) rotate(10deg)}
 .favicon-img{width:48px;height:48px;display:block}
 @media (max-width:640px){.favicon-img{width:34px;height:34px}}
-.grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(290px,1fr);gap:22px;align-items:start}
+.grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(290px,1fr);gap:22px;align-items:stretch}
 .lab{min-width:0}
 .stage{border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--line);background:#c2d0d6}
 .stage canvas{display:block;width:100%;height:auto;aspect-ratio:900/540;touch-action:none;-webkit-user-select:none;user-select:none}
@@ -117,8 +117,15 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .sw.ice{background:var(--ice);box-shadow:inset 0 0 0 1.5px var(--ice-edge)}
 .sw.water{background:var(--water)}
 .foot p{margin:22px 0 0;color:var(--muted);font-size:14px;max-width:80ch}
-.coffee-row{display:flex;justify-content:center;margin-top:6px}
-.coffee-embed-frame{display:inline-block;line-height:0}
+.bottom-block{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-top:10px}
+.more-sims{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--ink);text-decoration:none}
+.more-sims:hover,.more-sims:focus-visible{color:var(--accent)}
+.more-sims-icon{width:26px;height:26px;display:block;transition:transform .2s ease}
+.more-sims:hover .more-sims-icon,.more-sims:focus-visible .more-sims-icon{transform:scale(1.15) rotate(10deg)}
+.more-sims-note{margin:0;color:var(--muted);font-size:13px;max-width:230px;line-height:1.4}
+.coffee-row{display:flex;justify-content:center;margin-top:2px}
+.coffee-embed-frame{display:inline-block;line-height:0;transition:transform .2s ease}
+.coffee-embed-frame:hover,.coffee-embed-frame:focus-within{transform:scale(1.08)}
 .coffee-embed{width:250px;height:60px;border:0;border-radius:10px;overflow:hidden}
-@media (max-width:980px){.grid{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:1fr 1fr}.coffee-row{grid-column:1 / -1}}
+@media (max-width:980px){.grid{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:1fr 1fr}.bottom-block{grid-column:1 / -1}}
 @media (max-width:640px){.app{padding:18px 14px 24px}.panel{display:flex}.story{grid-template-columns:1fr}}

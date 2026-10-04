@@ -24,3 +24,11 @@ npm run preview
 - `src/main.jsx` — React root bootstrap.
 - `src/App.jsx` — the simulation: physics model, SVG drawing, and all React components.
 - `src/styles.css` — all styling for the app.
+- `.github/workflows/deploy.yml` — GitHub Actions workflow that builds and deploys to GitHub Pages on every push to `main`.
+
+## Deploying to GitHub Pages
+
+1. In `vite.config.js`, set `base` to `/your-repo-name/` (the exact name of your GitHub repo), e.g. `base: '/salt-ice-sim/'`. If this repo is a user/org page named `<username>.github.io`, use `base: '/'` instead.
+2. Push this project to a GitHub repo, on branch `main`.
+3. In the repo's Settings → Pages, set **Source** to "GitHub Actions".
+4. The included workflow (`.github/workflows/deploy.yml`) will build the project and publish `dist/` automatically on every push to `main`.
