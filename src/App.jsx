@@ -981,7 +981,7 @@ function App() {
             role: 'img', 'aria-label': `Beaker of crushed ice on a lab bench. Temperature ${fmtT(s.T)}, freezing point ${fmtT(s.fp)}. Insulation ${s.insulated ? 'on' : 'off'}.` })),
         h('div', { className: 'controls' },
           // the controls follow the steps: whichever action comes next is highlighted, and Stir pulses once salt is waiting to go in
-          h('button', { className: 'btn' + (stage === 0 ? ' primary' : ''), onClick: () => simRef.current.addScoop((X0 + X1) / 2 + rand(-40, 40), TOP), disabled: s.pinches <= 0 }, 'Add salt'),
+          h('button', { className: 'btn' + (stage === 0 ? ' primary cta' : ''), 'aria-label': stage === 0 ? 'Add salt, next step' : undefined, onClick: () => simRef.current.addScoop((X0 + X1) / 2 + rand(-40, 40), TOP), disabled: s.pinches <= 0 }, 'Add salt'),
           h('button', { className: 'btn stir' + (stage === 1 && !s.stirring ? ' primary cta' : ''), onClick: () => simRef.current.startStir(), disabled: s.stirring,
             'aria-label': stage === 1 && !s.stirring ? 'Stir, next step' : undefined }, s.stirring ? 'Stirring\u2026' : 'Stir'),
           h('button', { className: 'btn', onClick: () => simRef.current.addCream(), disabled: !!s.cream }, s.cream ? 'Ice cream added' : 'Add ice cream'),
