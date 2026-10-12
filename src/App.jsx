@@ -666,7 +666,7 @@ function draw(ctx, sim, dpr, now, reduced) {
     ctx.strokeStyle = '#1b262e'; ctx.lineWidth = 2; ctx.beginPath();
     ctx.moveTo(cx, 328 + bob); ctx.lineTo(cx, 356 + bob); ctx.moveTo(cx - 5, 350 + bob); ctx.lineTo(cx, 356 + bob); ctx.lineTo(cx + 5, 350 + bob); ctx.stroke();
   } else if (sim.scoopsIn > sim.scoopsStirred && !sim.stir && !sim.drag) {
-    haloText(ctx, 'Now stir it in', (X0 + X1) / 2 + 20, TOP - 34 + bob, '#1b262e');
+    haloText(ctx, 'Now press Stir below', (X0 + X1) / 2 + 20, TOP - 34 + bob, '#1b262e');
   }
 
   // dragging a scoop
@@ -980,8 +980,10 @@ function App() {
           h('canvas', { ref: cvRef, onPointerDown: onDown, onPointerMove: onMove, onPointerUp: onUp, onPointerCancel: onUp,
             role: 'img', 'aria-label': `Beaker of crushed ice on a lab bench. Temperature ${fmtT(s.T)}, freezing point ${fmtT(s.fp)}. Insulation ${s.insulated ? 'on' : 'off'}.` })),
         h('div', { className: 'controls' },
-          h('button', { className: 'btn primary', onClick: () => simRef.current.startStir(), disabled: s.stirring }, s.stirring ? 'Stirring\u2026' : 'Stir'),
-          h('button', { className: 'btn', onClick: () => simRef.current.addScoop((X0 + X1) / 2 + rand(-40, 40), TOP), disabled: s.pinches <= 0 }, 'Add salt'),
+          // the controls follow the steps: whichever action comes next is highlighted, and Stir pulses once salt is waiting to go in
+          h('button', { className: 'btn' + (stage === 0 ? ' primary' : ''), onClick: () => simRef.current.addScoop((X0 + X1) / 2 + rand(-40, 40), TOP), disabled: s.pinches <= 0 }, 'Add salt'),
+          h('button', { className: 'btn stir' + (stage === 1 && !s.stirring ? ' primary cta' : ''), onClick: () => simRef.current.startStir(), disabled: s.stirring,
+            'aria-label': stage === 1 && !s.stirring ? 'Stir, next step' : undefined }, s.stirring ? 'Stirring\u2026' : 'Stir'),
           h('button', { className: 'btn', onClick: () => simRef.current.addCream(), disabled: !!s.cream }, s.cream ? 'Ice cream added' : 'Add ice cream'),
           h('div', { className: 'speed', role: 'group', 'aria-label': 'Play, pause and speed' },
             
