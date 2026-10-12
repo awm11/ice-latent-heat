@@ -969,7 +969,7 @@ function App() {
 
   return h('div', { className: 'app' },
     h('header', { className: 'top' },
-      h('a', { className: 'favicon-link', href: 'https://awm11.github.io/', target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Visit awm11.github.io' },
+      h('a', { className: 'favicon-link', href: 'https://alexmoorephysics.com/', target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Visit alexmoorephysics.com' },
         h('img', { src: `${import.meta.env.BASE_URL}favicon.svg`, alt: '', className: 'favicon-img' })),
       h('div', { className: 'title-block' },
         h('h1', null, 'Why does salt make ice colder?'),
@@ -1021,7 +1021,7 @@ function App() {
           h('p', { className: 'note' }, 'By mass'),
           h(Pie, { water: s.m })),
         h('div', { className: 'bottom-block' },
-          h('a', { className: 'more-sims', href: 'https://awm11.github.io/', target: '_blank', rel: 'noopener noreferrer' },
+          h('a', { className: 'more-sims', href: 'https://alexmoorephysics.com/', target: '_blank', rel: 'noopener noreferrer' },
             h('img', { src: `${import.meta.env.BASE_URL}favicon.svg`, alt: '', className: 'more-sims-icon' }),
             h('span', null, 'See other simulations')),
           h('p', { className: 'more-sims-note' }, 'Click the icon above to explore other interactive physics simulations like this one, or below to support the project.'),
