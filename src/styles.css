@@ -26,7 +26,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",
 .app{max-width:1280px;margin:0 auto;padding:28px 24px 32px}
 .top{position:relative;text-align:center}
 .title-block{max-width:720px;margin:0 auto}
-.top h1{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-0.02em;margin:0 0 8px}
+.top h1{font-family:"Instrument Sans","IBM Plex Sans",system-ui,sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-0.02em;margin:0 0 8px}
 .lede{margin:0 auto 22px;color:var(--muted);font-size:18px;max-width:60ch}
 .favicon-link{position:absolute;top:0;right:0;display:inline-block;line-height:0;transition:transform .2s ease}
 .favicon-link:hover,.favicon-link:focus-visible{transform:scale(1.15) rotate(10deg)}
@@ -79,7 +79,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .explain p:last-child{margin-bottom:0}
 .panel{display:flex;flex-direction:column;gap:14px}
 .fig{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px}
-.fig h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:20px;letter-spacing:-0.01em;margin:0 0 4px}
+.fig h2{font-family:"Instrument Sans","IBM Plex Sans",system-ui,sans-serif;font-weight:600;font-size:20px;letter-spacing:-0.01em;margin:0 0 4px}
 .eq{margin:0 0 6px;font-size:15px}
 .eq .k{color:var(--ke);font-weight:700}
 .eq .p{color:var(--pe);font-weight:700}
